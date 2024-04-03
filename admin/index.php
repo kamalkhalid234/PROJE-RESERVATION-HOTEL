@@ -1,6 +1,6 @@
 <?php
-require('inc/essentials.php');
-require("inc/db_config.php");
+require ('inc/essentials.php');
+require ("inc/db_config.php");
 
 session_start();
 if ((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)) {
@@ -16,7 +16,7 @@ if ((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login Panel</title>
-    <?php require("inc/links.php"); ?>
+    <?php require ("inc/links.php"); ?>
     <style>
     div.login-form {
         position: absolute;
@@ -79,7 +79,7 @@ if ((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin'] == true)) {
     ?>
 
 
-    <?php require("inc/scripts.php"); ?>
+    <?php require ("inc/scripts.php"); ?>
 </body>
 
 </html>

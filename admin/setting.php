@@ -17,27 +17,28 @@ adminLogin();
 
 
     <style>
-    #dashboard-menu {
-        position: fixed;
-        height: 100%;
-    }
-
-    @media screen and (max-width : 991px) {
         #dashboard-menu {
-            height: auto;
-            width: 100%;
+            position: fixed;
+            height: 100%;
         }
 
-        #main-content {
-            margin-top: 60px;
-        }
-    }
+        @media screen and (max-width : 991px) {
+            #dashboard-menu {
+                height: auto;
+                width: 100%;
+            }
 
-    .custom-alert {
-        position: fixed;
-        top: 80px;
-        right: 25px;
-    }
+            #main-content {
+                margin-top: 60px;
+            }
+
+        }
+
+        .custom-alert {
+            position: fixed;
+            top: 80px;
+            right: 25px;
+        }
     </style>
 </head>
 
@@ -55,7 +56,7 @@ adminLogin();
 
 
                 <!-- General Setting secction -->
-                <div class="card">
+                <div class="card border-0 shadow mb-4">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">General Setting</h5>
@@ -108,6 +109,27 @@ adminLogin();
                         </form>
                     </div>
                 </div>
+
+                <!-- Shutdown  section -->
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="card-title m-0">Shutdown Website</h5>
+                            <div class="form-check form-switch">
+                                <form>
+                                    <input onchange="upd_shutdown(this.value)" class="form-check-input" type="checkbox"
+                                        id="shutdown-toggle">
+                                </form>
+                            </div>
+                        </div>
+                        <p class="card-text">
+                            No customers will be allowed to book hotel room,
+                            when shutdown mode is turned on.
+                        </p>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -116,62 +138,103 @@ adminLogin();
 
     <?php require ("inc/scripts.php"); ?>
     <script>
-    let general_data;
+        let general_data;
 
-    function get_general() {
-        let site_title = document.getElementById("site_title");
-        let site_about = document.getElementById("site_about");
+        function get_general() {
+            let site_title = document.getElementById("site_title");
+            let site_about = document.getElementById("site_about");
 
-        let site_title_inp = document.getElementById("site_title_inp");
-        let site_about_inp = document.getElementById("site_about_inp");
+            let site_title_inp = document.getElementById("site_title_inp");
+            let site_about_inp = document.getElementById("site_about_inp");
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "ajax/settings_crud.php", true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            let shutdown_toggle = document.getElementById('shutdown-toggle');
 
-        xhr.onload = function() {
-            general_data = JSON.parse(this.responseText);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                general_data = JSON.parse(this.responseText);
 
 
-            site_title.innerText = general_data.site_title;
-            site_about.innerText = general_data.site_about;
+                site_title.innerText = general_data.site_title;
+                site_about.innerText = general_data.site_about;
 
-            site_title_inp.value = general_data.site_title;
-            site_about_inp.value = general_data.site_about;
+                site_title_inp.value = general_data.site_title;
+                site_about_inp.value = general_data.site_about;
+
+                if (general_data.shutdown == 0) {
+                    shutdown_toggle.checked = false;
+                    shutdown_toggle.value = 0;
+                } else {
+                    shutdown_toggle.checked = true;
+                    shutdown_toggle.value = 1;
+                }
+            }
+
+            xhr.send('get_general');
         }
 
-        xhr.send('get_general');
-
-    }
-
-    function upd_general(site_title_val, site_about_val) {
-
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "ajax/settings_crud.php", true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-
-            var myModal = document.getElementById('general-s');
-            var modal = bootstrap.Modal.getInstance(myModal);
-            modal.hide();
 
 
+        //chaqnge le contenu de site web titre aboute
+        function upd_general(site_title_val, site_about_val) {
 
-            if (this.responseText == 1) {
-                alert('success', 'Changes saved!');
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+
+                var myModal = document.getElementById('general-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+
+                console.log(this.responseText);
+
+                if (this.responseText == 1) {
+                    alert('success', 'Changes saved!');
+                    get_general();
+                    console.log('data updated');
+                } else {
+                    alert('error', 'No Changes made!');
+                    console.log('no changes made');
+
+                }
+            }
+
+            xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
+        }
+
+
+
+
+        //of one le site web (shut down le site web avec boutone de active)
+        function upd_shutdown(val) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+
+                if (this.responseText == 1 && general_data.shutdown == 0) {
+                    alert('success', 'Site has been shatdown');
+
+                } else {
+                    alert('success', 'shutdown mode off!');
+                }
                 get_general();
-            } else {
-                alert('error', 'No Changes made!');
 
             }
+
+            xhr.send('upd_shutdown=' + val);
         }
 
-        xhr.send('site_title=' + site_title_val + '&site_about=' + site_about_val + '&upd_general');
-    }
-    window.onload = function() {
-        get_general();
-    }
+
+
+        window.onload = function () {
+            get_general();
+        }
     </script>
 
 </body>

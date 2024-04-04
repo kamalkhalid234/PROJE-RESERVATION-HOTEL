@@ -5,7 +5,7 @@
 <script>
   function alert(type, msg) {
     let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
-    let elemnet = document.createElement('div');
+    let element = document.createElement('div');
     element.innerHTML = `
            <div class="alert ${bs_class}  alert-dismissible fade show custom-alert" role="alert">
                  <strong class="me-3">${msg}</strong> 
@@ -13,6 +13,6 @@
              </div>
     `;
 
-    document.body.append(elemnet);
+    document.body.append(element);
   }
 </script>

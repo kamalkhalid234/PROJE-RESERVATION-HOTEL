@@ -21,10 +21,10 @@
                           <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
                       </li><br>
                       <li class="nav-item">
-                          <a class="nav-link text-white" href="#">Rooms</a>
+                          <a class="nav-link text-white" href="rooms.php">Rooms</a>
                       </li><br>
                       <li class="nav-item">
-                          <a class="nav-link text-white" href="#">Users</a>
+                          <a class="nav-link text-white" href="users.php">Users</a>
                       </li><br>
                       <li class="nav-item">
                           <a class="nav-link text-white" href="setting.php">Settings</a>

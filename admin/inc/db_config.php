@@ -14,10 +14,13 @@ if (!$con) {
 function filteration($data)
 {
     foreach ($data as $key => $value) {
-        $data[$key] = trim($value);
-        $data[$key] = stripcslashes($value);
-        $data[$key] = htmlspecialchars($value);
-        $data[$key] = strip_tags($value);
+        $value = trim($value);
+        $value = stripcslashes($value);
+        $value = strip_tags($value);
+        $value = htmlspecialchars($value);
+       
+
+        $data[$key] = $value;
 
     }
     return $data;

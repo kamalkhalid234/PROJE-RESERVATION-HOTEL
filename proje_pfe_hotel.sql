@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 05 avr. 2024 à 13:18
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Généré le : mar. 09 avr. 2024 à 03:46
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,7 +38,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`sr_no`, `admin_name`, `admin_pass`) VALUES
-(1, 'kamal', 'admin');
+(1, 'kamal', 'admin'),
+(2, 'abdelghani', 'admin1234');
 
 -- --------------------------------------------------------
 
@@ -86,6 +87,25 @@ CREATE TABLE `settings` (
 INSERT INTO `settings` (`sr_no`, `site_title`, `site_about`, `shutdown`) VALUES
 (1, 'HOTEL ', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim placeat dolorem vel, inventore nihil non eveniet tenetur cumque distinctio, a eius quidem accusantium aperiam id, eaque quia harum quod praesentium?\n\n', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `team_details`
+--
+
+CREATE TABLE `team_details` (
+  `sr_no` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `picture` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `team_details`
+--
+
+INSERT INTO `team_details` (`sr_no`, `name`, `picture`) VALUES
+(17, 'mn3ref', 'IMG_90636.jpg');
+
 --
 -- Index pour les tables déchargées
 --
@@ -109,6 +129,12 @@ ALTER TABLE `settings`
   ADD PRIMARY KEY (`sr_no`);
 
 --
+-- Index pour la table `team_details`
+--
+ALTER TABLE `team_details`
+  ADD PRIMARY KEY (`sr_no`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -116,7 +142,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `contact_details`
@@ -129,6 +155,12 @@ ALTER TABLE `contact_details`
 --
 ALTER TABLE `settings`
   MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `team_details`
+--
+ALTER TABLE `team_details`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

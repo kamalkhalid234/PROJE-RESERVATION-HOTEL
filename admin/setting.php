@@ -286,7 +286,7 @@ adminLogin();
                 </div>
 
 
-                <!-- Management details modal -->
+                <!-- Management team secetion  -->
                 <div class="card border-0 shadow mb-4">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
@@ -300,30 +300,31 @@ adminLogin();
 
                         <div class="row" id="team-data">
                         </div>
+
                     </div>
                 </div>
-                <!-- Management details modal -->
+                <!-- Management team modal -->
                 <div class="modal fade" id="team-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <form id="team_s_form">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Add Team Menber</h5>
+                                    <h5 class="modal-title">Add Team Member</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class=" mb-3">
                                         <label class="form-label fw-bold ">Name</label>
-                                        <input type="text" name="nember_name" class="form-control shadow-none"
-                                            id="nember_name_inp" required>
+                                        <input type="text" name="member_name" class="form-control shadow-none"
+                                            id="member_name_inp" required>
                                     </div>
 
                                     <div class=" mb-3 ">
                                         <label class="form-label fw-bold ">Picture</label>
-                                        <input type="file" name="nember_picture" class="form-control shadow-none"
-                                            id="nember_picture_inp" accept=".jpg, .png , webp , .jpeg " required>
+                                        <input type="file" name="member_picture" class="form-control shadow-none"
+                                            id="member_picture_inp" accept=".jpg, .png , webp , .jpeg " required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -338,9 +339,7 @@ adminLogin();
                 </div>
 
 
-                <?php
-                // echo $_SERVER['DOCUMENT_ROOT']; 
-                ?>
+               
             </div>
         </div>
     </div>
@@ -366,8 +365,7 @@ adminLogin();
 
 
 
-        function
-            get_general() {
+        function  get_general() {
             let site_title = document.getElementById("site_title");
             let site_about = document.getElementById("site_about");
             let shutdown_toggle = document.getElementById('shutdown-toggle');
@@ -462,8 +460,7 @@ adminLogin();
 
 
         //  change le contage en sittiong contacte   (affiche les element de contacte)
-        function
-            get_contacts() {
+        function get_contacts() {
 
             let contacts_p_id = ['address', 'gmap', 'pn1', 'pn2', 'email', 'fb', 'insta', 'tw'];
             let iframe = document.getElementById('iframe');
@@ -554,8 +551,8 @@ adminLogin();
         //
         function add_member() {
             let data = new FormData();
-            data.append('name', nember_name_inp.value);
-            data.append('picture', nember_picture_inp.files[0]);
+            data.append('name', member_name_inp.value);
+            data.append('picture', member_picture_inp.files[0]);
             data.append('add_member', '');
 
             let xhr = new XMLHttpRequest();
@@ -563,25 +560,75 @@ adminLogin();
 
 
             xhr.onload = function () {
-                console.log(this.responseText);
-                // var myModal = document.getElementById('general-s');
-                // var modal = bootstrap.Modal.getInstance(myModal);
-                // modal.hide();
+                
+                 var myModal = document.getElementById('team-s');
+                 var modal = bootstrap.Modal.getInstance(myModal);
+                 modal.hide();
 
-                // console.log(this.responseText);
+                 if(this.responseText == 'inv_img'){
+                    alert('error','Only png , jpg images  are allowed!');
+                 }
+                 else if(this.responseText == 'inv_size'){
+                    alert('error','Image should be less than 2MB!');   
+                 }
+                 else if(this.responseText == 'upd_failed'){
+                    alert('error','Image upload failed Server Down!');  
+                 }
+                 else {
+                    alert('success','New member added!');
+                    member_name_inp.value='';
+                    member_picture_inp.value='';
+                    get_members();
+                 }
 
-                // if (this.responseText == 1) {
-                //     alert('success', 'Changes saved!');
-                //     get_general();
-                //     console.log('data updated');
-                // } else {
-                //     alert('error', 'No Changes made!');
-                //     console.log('no changes made');
 
-                // }
+
+
+
+
+
+
             }
 
             xhr.send(data);
+        }
+
+
+
+        function get_members()
+        {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                document.getElementById('team-data').innerHTML = this.responseText;
+                
+            }
+
+            xhr.send('get_members');
+
+        }
+
+
+        function rem_member(val)
+        {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+               if(this.responseText==1){
+                alert('success','Member removed!');
+                get_members();
+               }
+               else {
+                alert('error','Server down!')
+               }
+            }
+
+            xhr.send('rem_member='+val);
+
         }
 
 
@@ -590,6 +637,7 @@ adminLogin();
         window.onload = function () {
             get_general();
             get_contacts();
+            get_members();
         }
     </script>
 

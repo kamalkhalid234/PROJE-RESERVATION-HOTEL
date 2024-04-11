@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TJ Hotel - Home</title>
-    <?php require('inc/links.php') ?>
+    <?php require ('inc/links.php') ?>
 
     <style>
     .availability-form {
@@ -26,8 +26,7 @@
 <body class="bg-light">
     <!--------header---------->
     <?php
-    require('inc/header-1.php');
-    require('inc/header.php');
+    require ('inc/header.php');
     ?>
 
     <!-- Carousel -->
@@ -36,25 +35,19 @@
         <!-- Swiper  Image-->
         <div class="swiper swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_1.png" class="w-100 d-block" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_2.png" class="w-100 d-block" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_3.png" class="w-100 d-block" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_4.png" class="w-100 d-block" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_5.png" class="w-100 d-block" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="images/carousel/IMG_6.png" class="w-100 d-block" />
-                </div>
+                <?php
+                $res = selectAll('carousel');
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $path = CAROUSEL_IMG_PATH;
+                    echo <<<data
+                            
+                         <div class="swiper-slide">
+                             <img src="$path$row[image]  " class="w-100 d-block" />
+                         </div>               
+                         data;
+                }
 
+                ?>
             </div>
         </div>
     </div>
@@ -430,36 +423,36 @@
     <div class="container">
         <div class="row">
             <div class="col-log-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
-                <iframe class="w-100 rounded" height="340"
-                    src="<?php echo $contact_r['iframe'] ?>"
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="w-100 rounded" height="340" src="<?php echo $contact_r['iframe'] ?>" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="col-lg-4 col-md-4">
                 <!-- chap 1  (tele)-->
                 <div class="bg-white p-4 rounded mb-4">
                     <h5>Call us</h5>
-                    <a href="tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+                    <a href="tel: +<?php echo $contact_r['pn1'] ?>"
+                        class="d-inline-block mb-2 text-decoration-none text-dark">
                         <i class="bi bi-telephone-fill"></i>+<?php echo $contact_r['pn1'] ?></a>
                     <br>
                     <!-- ila mdkhlnach nmra tanya maghat2afichach  -->
                     <?php
-                    if($contact_r['pn2']!=''){
-                        echo <<< data
+                    if ($contact_r['pn2'] != '') {
+                        echo <<<data
                         <a href="tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
                         <i class="bi bi-telephone-fill"></i>+$contact_r[pn2]</a>
                         data;
 
                     }
                     ?>
-                    
+
                 </div>
                 <!-- chap 2 (insta,facbook) -->
                 <div class="bg-white p-4 rounded mb-4">
                     <h5>Follow us</h5>
                     <!-- ila saizanahom ghyt2afichaw l3ks la -->
                     <?php
-                      if($contact_r['tw']!=''){
-                        echo <<< data
+                    if ($contact_r['tw'] != '') {
+                        echo <<<data
                         <a href="$contact_r[tw]" class="d-inline-block mb-3 ">
                         <span class="badge bg-light text-dark fs-6 p-2">
                             <i class="bi bi-twitter me-1"></i> Twitter
@@ -471,8 +464,8 @@
 
                     }
                     ?>
-                    
-                    
+
+
                     <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block mb-3 ">
                         <span class="badge bg-light text-dark fs-6 p-2">
                             <i class="bi bi-facebook me-1"></i> Facebook
@@ -492,7 +485,7 @@
 
 
     <!----- **********  Footer  ****************--->
-    <?php require('inc/footer.php'); ?>
+    <?php require ('inc/footer.php'); ?>
 
 
     <!-- IMAGE Use Swiper from CDN -->

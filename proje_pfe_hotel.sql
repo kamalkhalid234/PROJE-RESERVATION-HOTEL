@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 09 avr. 2024 à 03:46
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.0.28
+-- Généré le : jeu. 11 avr. 2024 à 04:18
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,6 +44,25 @@ INSERT INTO `admin` (`sr_no`, `admin_name`, `admin_pass`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `carousel`
+--
+
+CREATE TABLE `carousel` (
+  `sr_no` int(11) NOT NULL,
+  `image` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `carousel`
+--
+
+INSERT INTO `carousel` (`sr_no`, `image`) VALUES
+(7, 'IMG_35815.png'),
+(8, 'IMG_50029.png');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `contact_details`
 --
 
@@ -65,7 +84,7 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`sr_no`, `address`, `gmap`, `pn1`, `pn2`, `email`, `fb`, `insta`, `tw`, `iframe`) VALUES
-(1, ' XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '+212689062738', '+212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
+(1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062730', '212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
 
 -- --------------------------------------------------------
 
@@ -104,7 +123,36 @@ CREATE TABLE `team_details` (
 --
 
 INSERT INTO `team_details` (`sr_no`, `name`, `picture`) VALUES
-(17, 'mn3ref', 'IMG_90636.jpg');
+(26, 'kamal', 'IMG_49729.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_queries`
+--
+
+CREATE TABLE `user_queries` (
+  `sr_no` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `subject` varchar(200) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `seen` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_queries`
+--
+
+INSERT INTO `user_queries` (`sr_no`, `name`, `email`, `subject`, `message`, `date`, `seen`) VALUES
+(10, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'aqaa', 'aaa', '2024-04-11', 0),
+(11, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaa', '2024-04-11', 0),
+(12, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
+(13, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
+(14, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
+(15, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
+(16, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0);
 
 --
 -- Index pour les tables déchargées
@@ -114,6 +162,12 @@ INSERT INTO `team_details` (`sr_no`, `name`, `picture`) VALUES
 -- Index pour la table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`sr_no`);
+
+--
+-- Index pour la table `carousel`
+--
+ALTER TABLE `carousel`
   ADD PRIMARY KEY (`sr_no`);
 
 --
@@ -135,6 +189,12 @@ ALTER TABLE `team_details`
   ADD PRIMARY KEY (`sr_no`);
 
 --
+-- Index pour la table `user_queries`
+--
+ALTER TABLE `user_queries`
+  ADD PRIMARY KEY (`sr_no`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -143,6 +203,12 @@ ALTER TABLE `team_details`
 --
 ALTER TABLE `admin`
   MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `carousel`
+--
+ALTER TABLE `carousel`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `contact_details`
@@ -160,7 +226,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT pour la table `team_details`
 --
 ALTER TABLE `team_details`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `user_queries`
+--
+ALTER TABLE `user_queries`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

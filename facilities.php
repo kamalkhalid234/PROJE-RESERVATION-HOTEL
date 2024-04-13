@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TJ Hotel - Facilities</title>
-    <?php require('inc/links.php') ?>
+    <?php require ('inc/links.php') ?>
     <style>
-        .h-line {
-            width: 150px;
-            margin: 0 auto;
-            height: 1.7px;
-        }
+    .h-line {
+        width: 150px;
+        margin: 0 auto;
+        height: 1.7px;
+    }
 
-        .pop:hover {
-            border-top-color: #2ec1ac !important;
-            transform: scale(1.03);
-            transition: all 0.3s;
-        }
+    .pop:hover {
+        border-top-color: #2ec1ac !important;
+        transform: scale(1.03);
+        transition: all 0.3s;
+    }
     </style>
 </head>
 
@@ -27,8 +27,8 @@
     <!-------- ********** header **********---------->
 
     <?php
-    require('inc/header-1.php');
-    require('inc/header.php');
+    require ('inc/header-1.php');
+    require ('inc/header.php');
     ?>
 
 
@@ -42,78 +42,29 @@
     </div>
     <div class="container">
         <div class="row">
-            <!-- scale 1 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
-            <!-- scale 2 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4 ">
-                <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
-            <!-- scale 3 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
-            <!-- scale 4 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
-            <!-- scale 5 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
-            <!-- scale 6 -->
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded  shadow p-4 border-top  border-3 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="images/facilities/wifi.svg" width="40px" alt="">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-                    </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat blanditiis quaerat cumque nisi
-                        et
-                        consequatur similique exceptur </p>
-                </div>
-            </div>
+
+            <?php
+            //! affiche elemde de la base de donne facilitie\
+            
+            $res = selectAll('facilities');
+            $path = FACILITIES_IMG_PATH;
+
+            while ($row = mysqli_fetch_assoc($res)) {
+                echo <<<data
+                         <!-- scale 2 -->
+                         <div class="col-lg-4 col-md-6 mb-5 px-4 ">
+                             <div class="bg-white rounded  shadow p-4 border-top border-3 border-dark pop">
+                                 <div class="d-flex align-items-center mb-2">
+                                     <img src="$path/$row[icon]" width="40px" alt="">
+                                     <h5 class="m-0 ms-3">$row[name]</h5>
+                                 </div>
+                                 <p>$row[description]</p>
+                              </div>
+                          </div>
+                        data;
+            }
+            // echo $path;
+            ?>
         </div>
     </div>
 
@@ -123,14 +74,14 @@
 
 
     <!----- **********  Footer  ****************--->
-    <?php require('inc/footer.php'); ?>
+    <?php require ('inc/footer.php'); ?>
 
 
 
-       <!-- lien Bundle nav-bar -->
+    <!-- lien Bundle nav-bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
 </body>
 

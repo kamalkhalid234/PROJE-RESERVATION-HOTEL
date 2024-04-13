@@ -1,22 +1,24 @@
 <?php
 
-// frontend purpose data 
+//! frontend purpose data 
 define('SITE_URL', 'http://127.0.0.1/MCW/PROJE-RESERVATION-HOTEL/');
 define('ABOUT_IMG_PATH', SITE_URL . 'images/about/');
 define('CAROUSEL_IMG_PATH', SITE_URL . 'images/carousel/');
+define('FACILITIES_IMG_PATH', SITE_URL . 'images/facilities');
 
-//back-end upload process needs this data
+//! back-end upload process needs this data
 
 
 
-//define folder image
+//! define folder image
 define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . "/MCW/PROJE-RESERVATION-HOTEL/images/");
 define('ABOUT_FOLDER', 'about/');
 define('CAROUSEL_FOLDER', 'carousel/');
+define('FACILITIES_FOLDER', 'facilities/');
 
 
 
-//function login 
+//! ******* function LOGIN DE SITE WEB
 function adminLogin()
 {
     session_start();
@@ -51,31 +53,6 @@ function alert($type, $msg)
             alert;
 }
 
-//uploade image 
-// function uploadImage($image, $folder)
-// {
-//     $valid_mime = ['images/jpeg', 'images/png', 'images/webp'];
-//     $img_mime = $image['type'];
-
-
-//     if (!in_array($img_mime, $valid_mime)) {
-//         return 'inv_img';   // invalide image mime or format
-//     } else if (($image['size'] / (1024 * 1024)) > 2) {
-//         return 'inv_size'; //invlide seze greater than 2mb
-
-//     } else {
-//         $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-//         $rname = 'IMG_' . random_int(11111, 99999) . ".$ext";
-
-//         $img_path = UPLOAD_IMAGE_PATH . $folder . $rname;
-//         if (move_uploaded_file($image['tmp_name'],$img_path)) {
-//             return $rname;
-//         } else {
-//             return 'upd_failed';
-//         }
-
-//     }
-// }
 function uploadImage($image, $folder)
 {
     $valid_mime = ['image/jpeg', 'image/png', 'image/webp'];
@@ -104,6 +81,31 @@ function deleteImage($image, $folder)
         return true;
     } else {
         return false;
+    }
+}
+
+
+
+//! function de facilitye
+function uploadSVGImage($image, $folder)
+{
+    $valid_mime = ['image/svg+xml'];
+    $img_mime = $image['type'];
+
+    if (!in_array($img_mime, $valid_mime)) {
+        return 'inv_img';   // invalide image mime or format
+    } else if (($image['size'] / (1024 * 1024)) > 1) {
+        return 'inv_size'; // invlide seze greater than 1mb
+    } else {
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $rname = 'IMG_' . random_int(11111, 99999) . ".$ext";
+
+        $img_path = UPLOAD_IMAGE_PATH . $folder . $rname;
+        if (move_uploaded_file($image['tmp_name'], $img_path)) {
+            return $rname;
+        } else {
+            return 'upd_failed';
+        }
     }
 }
 ?>

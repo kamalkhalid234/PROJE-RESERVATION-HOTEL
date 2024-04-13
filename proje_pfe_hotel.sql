@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 11 avr. 2024 à 04:18
+-- Généré le : sam. 13 avr. 2024 à 02:00
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -85,6 +85,52 @@ CREATE TABLE `contact_details` (
 
 INSERT INTO `contact_details` (`sr_no`, `address`, `gmap`, `pn1`, `pn2`, `email`, `fb`, `insta`, `tw`, `iframe`) VALUES
 (1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062730', '212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `facilities`
+--
+
+CREATE TABLE `facilities` (
+  `id` int(11) NOT NULL,
+  `icon` varchar(100) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `facilities`
+--
+
+INSERT INTO `facilities` (`id`, `icon`, `name`, `description`) VALUES
+(7, 'IMG_25059.svg', '1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(9, 'IMG_52073.svg', '2', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(10, 'IMG_12731.svg', '3', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(11, 'IMG_27113.svg', '4', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(13, 'IMG_49567.svg', '5', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(14, 'IMG_18986.svg', '6', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(15, 'IMG_88209.svg', '8', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `features`
+--
+
+CREATE TABLE `features` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `features`
+--
+
+INSERT INTO `features` (`id`, `name`) VALUES
+(2, 'oussama'),
+(3, 'halima'),
+(4, 'kkk');
 
 -- --------------------------------------------------------
 
@@ -177,6 +223,18 @@ ALTER TABLE `contact_details`
   ADD PRIMARY KEY (`sr_no`);
 
 --
+-- Index pour la table `facilities`
+--
+ALTER TABLE `facilities`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `features`
+--
+ALTER TABLE `features`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `settings`
 --
 ALTER TABLE `settings`
@@ -215,6 +273,18 @@ ALTER TABLE `carousel`
 --
 ALTER TABLE `contact_details`
   MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `facilities`
+--
+ALTER TABLE `facilities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `features`
+--
+ALTER TABLE `features`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `settings`

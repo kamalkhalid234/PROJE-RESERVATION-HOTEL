@@ -137,27 +137,47 @@ function get_facility() {
     xhr.send('get_facility');
 
 }
-//function 
+// //function
+// function rem_facility(val) {
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("POST", "ajax/features_facilities.php", true);
+//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+//     xhr.onload = function () {
+//         if (this.responseText == 1) {
+//             alert('success', 'Facility removed!');
+//             get_facility();
+//         } else if (this.responseText == 'room_added') {
+//             alert('error', 'Facility  is added in room!');
+
+//         } else {
+//             alert('error', 'Server down!');
+//         }
+//     }
+
+//     xhr.send('rem_facility=' + val);
+
+// }
+
 function rem_facility(val) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "ajax/features_facilities.php", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function () {
-        if (this.responseText == 1) {
+        if (this.responseText == '1') {
             alert('success', 'Facility removed!');
             get_facility();
         } else if (this.responseText == 'room_added') {
-            alert('error', 'Facility  is added in room!');
-
+            alert('error', 'Facility is added in room!');
         } else {
             alert('error', 'Server down!');
         }
-    }
+    };
 
-    xhr.send('rem_facility=' + val);
-
+    xhr.send('rem_facility=' + encodeURIComponent(val)); // Encodage de la valeur pour éviter des problèmes avec des caractères spéciaux
 }
+
 
 
 //function

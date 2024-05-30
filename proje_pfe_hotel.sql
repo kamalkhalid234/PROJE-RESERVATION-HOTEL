@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 13 avr. 2024 à 02:00
+-- Généré le : jeu. 30 mai 2024 à 15:45
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -84,7 +84,7 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`sr_no`, `address`, `gmap`, `pn1`, `pn2`, `email`, `fb`, `insta`, `tw`, `iframe`) VALUES
-(1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062730', '212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
+(1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062738', '212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
 
 -- --------------------------------------------------------
 
@@ -128,9 +128,86 @@ CREATE TABLE `features` (
 --
 
 INSERT INTO `features` (`id`, `name`) VALUES
-(2, 'oussama'),
-(3, 'halima'),
-(4, 'kkk');
+(2, 'bedroom'),
+(3, 'balcony'),
+(4, 'kitchen');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `area` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `adult` int(11) NOT NULL,
+  `children` int(11) NOT NULL,
+  `description` varchar(350) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `rooms`
+--
+
+INSERT INTO `rooms` (`id`, `name`, `area`, `price`, `quantity`, `adult`, `children`, `description`, `status`) VALUES
+(22, 'kamal', 5, 100, 3, 2, 7, 'aaaajjjjnnjhhm', 1),
+(23, 'kamaal', 4, 22, 99, 1, 2, 'kaka', 1),
+(24, 'oussama', 3, 110, 3, 84, 3, 'jsjs', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rooms_facilites`
+--
+
+CREATE TABLE `rooms_facilites` (
+  `sr_no` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `facilities_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `rooms_facilites`
+--
+
+INSERT INTO `rooms_facilites` (`sr_no`, `room_id`, `facilities_id`) VALUES
+(25, 23, 9),
+(26, 23, 14),
+(27, 24, 9),
+(67, 22, 7),
+(68, 22, 9),
+(69, 22, 10),
+(70, 22, 13),
+(71, 22, 14),
+(72, 22, 15);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `room_features`
+--
+
+CREATE TABLE `room_features` (
+  `sr_no` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `features_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `room_features`
+--
+
+INSERT INTO `room_features` (`sr_no`, `room_id`, `features_id`) VALUES
+(12, 23, 2),
+(13, 23, 3),
+(14, 24, 3),
+(34, 22, 2),
+(35, 22, 4);
 
 -- --------------------------------------------------------
 
@@ -150,7 +227,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`sr_no`, `site_title`, `site_about`, `shutdown`) VALUES
-(1, 'HOTEL ', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim placeat dolorem vel, inventore nihil non eveniet tenetur cumque distinctio, a eius quidem accusantium aperiam id, eaque quia harum quod praesentium?\n\n', 0);
+(1, 'HOTEL K', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim placeat dolorem vel, inventore nihil non eveniet tenetur cumque distinctio, a eius quidem accusantium aperiam id, eaque quia harum quod praesentium?', 0);
 
 -- --------------------------------------------------------
 
@@ -198,7 +275,9 @@ INSERT INTO `user_queries` (`sr_no`, `name`, `email`, `subject`, `message`, `dat
 (13, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
 (14, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
 (15, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(16, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0);
+(16, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
+(17, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'probleme', 'progleme', '2024-04-13', 0),
+(18, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'probleme', 'progleme', '2024-04-13', 0);
 
 --
 -- Index pour les tables déchargées
@@ -233,6 +312,28 @@ ALTER TABLE `facilities`
 --
 ALTER TABLE `features`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `rooms_facilites`
+--
+ALTER TABLE `rooms_facilites`
+  ADD PRIMARY KEY (`sr_no`),
+  ADD KEY `room id` (`room_id`),
+  ADD KEY `facilities id` (`facilities_id`);
+
+--
+-- Index pour la table `room_features`
+--
+ALTER TABLE `room_features`
+  ADD PRIMARY KEY (`sr_no`),
+  ADD KEY `features id` (`features_id`),
+  ADD KEY `rm id` (`room_id`);
 
 --
 -- Index pour la table `settings`
@@ -278,13 +379,31 @@ ALTER TABLE `contact_details`
 -- AUTO_INCREMENT pour la table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `features`
 --
 ALTER TABLE `features`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `rooms_facilites`
+--
+ALTER TABLE `rooms_facilites`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT pour la table `room_features`
+--
+ALTER TABLE `room_features`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
@@ -302,7 +421,25 @@ ALTER TABLE `team_details`
 -- AUTO_INCREMENT pour la table `user_queries`
 --
 ALTER TABLE `user_queries`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `rooms_facilites`
+--
+ALTER TABLE `rooms_facilites`
+  ADD CONSTRAINT `facilities id` FOREIGN KEY (`facilities_id`) REFERENCES `facilities` (`id`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `room id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `room_features`
+--
+ALTER TABLE `room_features`
+  ADD CONSTRAINT `features id` FOREIGN KEY (`features_id`) REFERENCES `features` (`id`) ON UPDATE NO ACTION,
+  ADD CONSTRAINT `rm id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

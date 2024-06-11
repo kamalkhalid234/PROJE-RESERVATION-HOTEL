@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 30 mai 2024 à 15:45
+-- Généré le : mar. 11 juin 2024 à 11:24
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -57,8 +57,9 @@ CREATE TABLE `carousel` (
 --
 
 INSERT INTO `carousel` (`sr_no`, `image`) VALUES
-(7, 'IMG_35815.png'),
-(8, 'IMG_50029.png');
+(16, 'IMG_23917.png'),
+(17, 'IMG_58910.png'),
+(20, 'IMG_28400.png');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,7 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`sr_no`, `address`, `gmap`, `pn1`, `pn2`, `email`, `fb`, `insta`, `tw`, `iframe`) VALUES
-(1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062738', '212689062738', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
+(1, 'XYZ , marakech', 'https://maps.app.goo.gl/6R3eYk8MW16e9VzdA', '212689062738', '212689062730', 'kamalkhalid234l@gmail.com', 'facebook.com', 'instagram.com', 'twitter.com', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d54295.1158505083!2d-7.889575702880851!3d31.73105948915371!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51:0x5950b6534f87adb8!2sMarrakesh!5e0!3m2!1sen!2sma!4v1712273599166!5m2!1sen!2sma');
 
 -- --------------------------------------------------------
 
@@ -107,10 +108,10 @@ INSERT INTO `facilities` (`id`, `icon`, `name`, `description`) VALUES
 (7, 'IMG_25059.svg', '1', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
 (9, 'IMG_52073.svg', '2', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
 (10, 'IMG_12731.svg', '3', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
-(11, 'IMG_27113.svg', '4', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
 (13, 'IMG_49567.svg', '5', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
 (14, 'IMG_18986.svg', '6', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
-(15, 'IMG_88209.svg', '8', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium');
+(15, 'IMG_88209.svg', '8', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, consequuntur fugiat facere nulla rem accusantium'),
+(17, 'IMG_23752.svg', 'kama', 'k');
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,8 @@ CREATE TABLE `features` (
 INSERT INTO `features` (`id`, `name`) VALUES
 (2, 'bedroom'),
 (3, 'balcony'),
-(4, 'kitchen');
+(4, 'kitchen'),
+(8, 'kamal');
 
 -- --------------------------------------------------------
 
@@ -147,17 +149,22 @@ CREATE TABLE `rooms` (
   `adult` int(11) NOT NULL,
   `children` int(11) NOT NULL,
   `description` varchar(350) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `removed` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `name`, `area`, `price`, `quantity`, `adult`, `children`, `description`, `status`) VALUES
-(22, 'kamal', 5, 100, 3, 2, 7, 'aaaajjjjnnjhhm', 1),
-(23, 'kamaal', 4, 22, 99, 1, 2, 'kaka', 1),
-(24, 'oussama', 3, 110, 3, 84, 3, 'jsjs', 1);
+INSERT INTO `rooms` (`id`, `name`, `area`, `price`, `quantity`, `adult`, `children`, `description`, `status`, `removed`) VALUES
+(22, 'redwan j', 5, 100, 3, 2, 7, 'aaaajjjjnnjhhmkkj', 1, 1),
+(23, 'kamaal', 4, 22, 99, 1, 2, 'kaka', 0, 1),
+(24, 'oussama', 3, 110, 3, 84, 3, 'jsjs', 1, 1),
+(25, 'kamal', 10, 100, 3, 333, 33, '33', 1, 1),
+(26, 'm', 10, 10, 10, 10, 10, 'zz', 0, 1),
+(27, 'jjj', 10, 10, 10, 1, 1, '1', 1, 0),
+(28, 'kaml', 19, 10, 19, 10, 10, 'jj', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -176,15 +183,8 @@ CREATE TABLE `rooms_facilites` (
 --
 
 INSERT INTO `rooms_facilites` (`sr_no`, `room_id`, `facilities_id`) VALUES
-(25, 23, 9),
-(26, 23, 14),
-(27, 24, 9),
-(67, 22, 7),
-(68, 22, 9),
-(69, 22, 10),
-(70, 22, 13),
-(71, 22, 14),
-(72, 22, 15);
+(99, 27, 10),
+(100, 28, 15);
 
 -- --------------------------------------------------------
 
@@ -203,11 +203,21 @@ CREATE TABLE `room_features` (
 --
 
 INSERT INTO `room_features` (`sr_no`, `room_id`, `features_id`) VALUES
-(12, 23, 2),
-(13, 23, 3),
-(14, 24, 3),
-(34, 22, 2),
-(35, 22, 4);
+(46, 27, 4),
+(47, 28, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `room_images`
+--
+
+CREATE TABLE `room_images` (
+  `sr_no` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `image` varchar(150) NOT NULL,
+  `thumb` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -227,7 +237,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`sr_no`, `site_title`, `site_about`, `shutdown`) VALUES
-(1, 'HOTEL K', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim placeat dolorem vel, inventore nihil non eveniet tenetur cumque distinctio, a eius quidem accusantium aperiam id, eaque quia harum quod praesentium?', 0);
+(1, 'HOTEL', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim placeat dolorem vel, inventore nihil non eveniet tenetur cumque distinctio, a eius quidem accusantium aperiam id, eaque quia harum quod praesentium?', 1);
 
 -- --------------------------------------------------------
 
@@ -246,7 +256,7 @@ CREATE TABLE `team_details` (
 --
 
 INSERT INTO `team_details` (`sr_no`, `name`, `picture`) VALUES
-(26, 'kamal', 'IMG_49729.jpg');
+(27, 'kamal', 'IMG_65324.jpg');
 
 -- --------------------------------------------------------
 
@@ -271,13 +281,7 @@ CREATE TABLE `user_queries` (
 INSERT INTO `user_queries` (`sr_no`, `name`, `email`, `subject`, `message`, `date`, `seen`) VALUES
 (10, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'aqaa', 'aaa', '2024-04-11', 0),
 (11, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'aaaaaaa', 'aaaaaaaaaaaaaaaaaaaaa', '2024-04-11', 0),
-(12, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(13, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(14, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(15, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(16, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0),
-(17, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'probleme', 'progleme', '2024-04-13', 0),
-(18, 'KHALID KAMAL', 'kamalkhalid234l@gmail.com', 'probleme', 'progleme', '2024-04-13', 0);
+(12, '[value-2]', '[value-3]', '[value-4]', '[value-5]', '0000-00-00', 0);
 
 --
 -- Index pour les tables déchargées
@@ -336,6 +340,13 @@ ALTER TABLE `room_features`
   ADD KEY `rm id` (`room_id`);
 
 --
+-- Index pour la table `room_images`
+--
+ALTER TABLE `room_images`
+  ADD PRIMARY KEY (`sr_no`),
+  ADD KEY `room_id` (`room_id`);
+
+--
 -- Index pour la table `settings`
 --
 ALTER TABLE `settings`
@@ -367,7 +378,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `carousel`
 --
 ALTER TABLE `carousel`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `contact_details`
@@ -379,31 +390,37 @@ ALTER TABLE `contact_details`
 -- AUTO_INCREMENT pour la table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `features`
 --
 ALTER TABLE `features`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `rooms_facilites`
 --
 ALTER TABLE `rooms_facilites`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT pour la table `room_features`
 --
 ALTER TABLE `room_features`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT pour la table `room_images`
+--
+ALTER TABLE `room_images`
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
@@ -415,7 +432,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT pour la table `team_details`
 --
 ALTER TABLE `team_details`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `user_queries`
@@ -440,6 +457,12 @@ ALTER TABLE `rooms_facilites`
 ALTER TABLE `room_features`
   ADD CONSTRAINT `features id` FOREIGN KEY (`features_id`) REFERENCES `features` (`id`) ON UPDATE NO ACTION,
   ADD CONSTRAINT `rm id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `room_images`
+--
+ALTER TABLE `room_images`
+  ADD CONSTRAINT `room_images_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

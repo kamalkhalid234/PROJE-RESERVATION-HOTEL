@@ -158,7 +158,7 @@ if (isset($_POST['edit_room'])) {
     // تحديث بيانات الغرفة
     $q1 = "UPDATE `rooms`
           SET `name`=?, `area`=?, `price`=?, `quantity`=?, `adult`=?, `children`=?, `description`=?
-          WHERE `id` = ?";
+          WHERE `id` =?";
 
     $values = [
         $frm_data['name'],
@@ -171,7 +171,7 @@ if (isset($_POST['edit_room'])) {
         $frm_data['room_id']
     ];
 
-    if (update($q1, $values, 'siiiiisi')) {
+    if (update($q1, $values, 'iiiiisi')) {
         $flag = 1;
         error_log("Room updated successfully");
     } else {
@@ -179,8 +179,8 @@ if (isset($_POST['edit_room'])) {
     }
 
     // حذف الميزات والمرافق المرتبطة
-    $del_features = delete("DELETE FROM `room_features` WHERE `room_id` = ?", [$frm_data['room_id']], 'i');
-    $del_facilities = delete("DELETE FROM `rooms_facilites` WHERE `room_id` = ?", [$frm_data['room_id']], 'i');
+    $del_features = delete("DELETE FROM `room_features` WHERE `room_id` =?", [$frm_data['room_id']], 'i');
+    $del_facilities = delete("DELETE FROM `rooms_facilites` WHERE `room_id` =?", [$frm_data['room_id']], 'i');
 
     if ($del_features && $del_facilities) {
         error_log("Features and facilities deleted successfully");
@@ -190,7 +190,7 @@ if (isset($_POST['edit_room'])) {
     }
 
     // إدخال المرافق الجديدة
-    $q2 = "INSERT INTO `rooms_facilites`(`room_id`, `facilities_id`) VALUES (?, ?)";
+    $q2 = "INSERT INTO `rooms_facilites`(`room_id`, `facilities_id`) VALUES (?,?)";
     if ($stmt = mysqli_prepare($con, $q2)) {
         foreach ($facilities as $f) {
             mysqli_stmt_bind_param($stmt, 'ii', $frm_data['room_id'], $f);
@@ -204,7 +204,7 @@ if (isset($_POST['edit_room'])) {
     }
 
     // إدخال الميزات الجديدة
-    $q3 = "INSERT INTO `room_features`(`room_id`, `features_id`) VALUES (?, ?)";
+    $q3 = "INSERT INTO `room_features`(`room_id`, `features_id`) VALUES (?,?)";
     if ($stmt = mysqli_prepare($con, $q3)) {
         foreach ($features as $f) {
             mysqli_stmt_bind_param($stmt, 'ii', $frm_data['room_id'], $f);
@@ -314,20 +314,17 @@ if (isset($_POST['rem_image'])) {
 }
 
 if (isset($_POST['thumb_image'])) {
-
     $frm_data = filteration($_POST);
 
     $pre_q = "UPDATE `room_images` SET `thumb`=? WHERE `room_id`=?";
     $pre_v = [0, $frm_data['room_id']];
     $pre_res = update($pre_q, $pre_v, 'ii');
 
-    $q = "UPDATE `room_images` SET `thumb`=? WHERE `sr_no`=?  AND `room_id`=?";
+    $q = "UPDATE `room_images` SET `thumb`=? WHERE `sr_no`=? AND `room_id`=?";
     $v = [1, $frm_data['image_id'], $frm_data['room_id']];
     $res = update($q, $v, 'iii');
 
     echo $res;
-
-
 }
 
 

@@ -382,6 +382,48 @@ if (isset($_GET['dell'])) {
 
 
 
+    <!-- manage room images modal -->
+    <div class="modal fade" id="room-images" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Room Name</h1>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="image-alert">
+
+                    </div>
+                    <div class="border-bottom border-3 pb-3 mb-3">
+                        <form id="add_image_form">
+                            <label class="form-label fw-bold ">Add Image</label>
+                            <input type="file" name="image" class="form-control shadow-none mb-3"
+                                accept=".jpg, .png , webp , .jpeg " required>
+                            <button class="btn custom-bg text-white shadow-none">ADD</button>
+                            <input type="hidden" name="room_id">
+                        </form>
+                    </div>
+                    <div class="table-responsive-lg" style="height:350px; overflow-y:scroll;">
+                        <table class=" table table-hover border text-center">
+                            <thead>
+                                <tr class="bg-dark text-light sticky-top ">
+                                    <th scope="col" width="60%">Image</th>
+                                    <th scope="col">Thumb</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="room-image-data">
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -553,8 +595,6 @@ if (isset($_GET['dell'])) {
     }
 
 
-
-
     function toggle_status(id, val) {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "ajax/rooms.php", true);
@@ -565,12 +605,73 @@ if (isset($_GET['dell'])) {
                 alert('success', 'Status toggle!!');
                 get_all_rooms();
             } else {
-                alert('error', 'Service down!');
+                alert('success', 'Service down!');
             }
         }
 
         xhr.send('toggle_status=' + id + '&value=' + val);
     }
+
+
+
+
+    let add_image_form = document.getElementById('add_image_form');
+
+
+    add_image_form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        add_image();
+    });
+
+
+    function add_image() {
+        let data = new FormData();
+        data.append('image', add_image_form.elements['image'].files[0]);
+        data.append('room_id', add_image_form.elements['room_id'].value);
+        data.append('add_image', '');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/rooms.php", true);
+
+
+        xhr.onload = function() {
+            if (this.responseText == 'inv_img') {
+                alert('error', 'Only JPG ,WEBP or PNG images  are allowed!');
+            } else if (this.responseText == 'inv_size') {
+                alert('error', 'Image should be less than 2MB!');
+            } else if (this.responseText == 'upd_failed') {
+                alert('error', 'Image upload failed Server Down!');
+            } else {
+                alert('success', 'New Image added!', 'image-alert');
+                add_image_form.reset();
+
+            }
+        }
+        xhr.send(data);
+    }
+
+
+
+    function room_images(id, rname) {
+        document.querySelector("#room-images   .modal-title").innerText = rname;
+        add_image_form.elements['room_id'].value = id;
+        add_image_form.elements['image'].value = '';
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/rooms.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function() {
+            document.getElementById('room-image-data').innerHTML = this.responseText;
+        }
+
+        xhr.send('get_room_images=' + id);
+
+    }
+
+
+
+
 
     window.onload = function() {
         get_all_rooms();

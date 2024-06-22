@@ -112,7 +112,7 @@
                     echo<<< data
                        
                        <div class="swiper-slide bg-white text-center overflow-hidden rounded">
-                           <img src="$path$row[picture]" class="w-100" >
+                           <img src="$path$row[picture]" class="w-100" width="190px" height="400" >
                            <h5 class="mt-2">$row[name]</h5>
                        </div>
    

@@ -1,6 +1,7 @@
 <?php 
   require('admin/inc/db_config.php');
   require('admin/inc/essentials.php');
+
   
  $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
  $values = [1];
@@ -62,7 +63,7 @@
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form method="post" action="ajax/login_register.php">
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center"><i class="bi bi-person-circle fs-3 me-2"></i>
                         User Login</h5>
@@ -94,8 +95,8 @@
 <div class="modal fade " id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable ">
-        <div class="modal-content">
-            <form id="register-form">
+        <div class="modal-content" >
+            <form id="register_form">
                 <div class="modal-header ">
                     <h5 class="modal-title d-flex align-items-center"><i class="bi bi-person-lines-fill fs-3 me-3"></i>
                         User
@@ -123,7 +124,7 @@
                             </div>
                             <div class="col-md-6 p-0 mb-3">
                                 <label class="form-label">Picture</label>
-                                <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" placeholder="Between Picture" class="form-control shadow-none"required>
+                                <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" placeholder="Between Picture" class="form-control shadow-none" required>
                             </div>
                             <div class="col-mb-12 p-0 mb-3 ">
                                 <label class="form-label">Address </label>
@@ -150,7 +151,7 @@
                         </div>
                     </div>
                     <div class="text-center my1 " >
-                        <button name="register" type="submit" class="btn btn-dark shadow-none">REGISTER</button>
+                        <button  name="register" type="submit" class="btn btn-dark shadow-none">REGISTER</button>
 
                     </div>
                 </div>

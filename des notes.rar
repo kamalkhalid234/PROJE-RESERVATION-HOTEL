@@ -98,6 +98,35 @@ Back end - Admin Login Panel
  back end - admin panel (setting page 1){
     javascript & ajax 
  }
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27204.779199156772!2d-8.780672669053523!3d31.53521577715168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdae3c8e5a7a38b9%3A0xc5bc4d7340a8159b!2sChichaoua!5e0!3m2!1sfr!2sma!4v1719525596860!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.9433432697824!2d72.85393251443796!3d19.02221808711878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf26f4972d21:0x2c50185364aca4c1!2sVeermata Jijabai Technological Institute!5e0!3m2!1sen!2sin!4v1670867131904!5m2!1sen!2sin
+
+
+
+ const languageSelector = document.getElementById("languageSelector");
+    let home = document.getElementById('home');
+    let rooms = document.getElementById('rooms');
+    let facilities = document.getElementById('facilities');
+    let contact = document.getElementById('contact');
+    let about = document.getElementById('about');
+    let login = document.getElementById('login');
+    let enregistre = document.getElementById('enregistre');
+
+    let h1Check = document.getElementById('h1Check');
+    let Check_in = document.getElementById('Check_in');
+    let Check_out = document.getElementById('Check_out');
+    let Adult = document.getElementById('Adult');
+    let Children = document.getElementById('Children');
+    let submt = document.getElementById('submt');
+
+    let our_rooms = document.getElementById('our_rooms');
+    let More_rooms = document.getElementById('More_rooms');
+    let our_facilities = document.getElementById('our_facilities');
+    let TESTIMONIALS = document.getElementById('TESTIMONIALS');
+    let REACH_US = document.getElementById('REACH_US');
+    let Call_us = document.getElementById('Call_us');
+    let Follow_us = document.getElementById('Follow_us');
 
 
 

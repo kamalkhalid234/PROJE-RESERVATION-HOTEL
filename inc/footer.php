@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 <div class="container-fluid bg-dark text-white  mt-5">
+=======
+!
+<div class="container-fluid bg-dark mt-5">
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
     <div class="row">
         <div class="col-lg-4 p-4">
             <h3 class="h-font fw-bold fs-3 mb-2"><?php echo $settings_r['site_title'] ?></h3>
@@ -34,14 +39,19 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 
 <h6 class="text-center bg-danger text-white p-3 m-0">PROGE FIN ETUDE 2024 </h6>
 
+=======
+<h6 class="text-center bg-danger text-white p-3 m-0">DEVLOPPEURS KAMAL KHALID , ABDELGHANI ELYAGOUTI</h6>
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
 <script>
+<<<<<<< HEAD
     function alert(type, msg, position = 'body') {
         let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
         let element = document.createElement('div');
@@ -66,6 +76,11 @@
     }
 
     function setActive() {
+=======
+     
+
+    function setActive(){
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
         let navbar = document.getElementById('nav-bar');
         let a_tags = navbar.getElementsByTagName('a');
 
@@ -80,6 +95,7 @@
         }
     }
 
+<<<<<<< HEAD
     let register_form = document.getElementById('register-form');
 
     register_form.addEventListener('submit', (e) => {
@@ -87,6 +103,37 @@
 
         let data = new FormData();
 
+=======
+    function alert(type, msg) {
+        let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';
+        let element = document.createElement('div');
+        element.innerHTML = `
+           <div class="alert ${bs_class}  alert-dismissible fade show custom-alert" role="alert">
+                 <strong class="me-3">${msg}</strong> 
+                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div>
+             `;
+
+        document.body.append(element);
+         setTimeout(remAlert, 3000);
+}
+
+      function remAlert() {
+        document.getElementsByClassName('alert')[0].remove();
+}
+
+
+let register_form = document.getElementById('register_form');
+register_form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    registration();
+});
+
+function  registration() {
+
+        let register_form = document.getElementById('register_form');
+        let data = new FormData();
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
         data.append('name', register_form.elements['name'].value);
         data.append('email', register_form.elements['email'].value);
         data.append('phonenum', register_form.elements['phonenum'].value);
@@ -96,7 +143,11 @@
         data.append('pass', register_form.elements['pass'].value);
         data.append('cpass', register_form.elements['cpass'].value);
         data.append('profile', register_form.elements['profile'].files[0]);
+<<<<<<< HEAD
         data.append('register', '');
+=======
+       // data.append('register', '');
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 
         var myModal = document.getElementById('registerModal');
         var modal = bootstrap.Modal.getInstance(myModal);
@@ -104,6 +155,7 @@
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "ajax/login_register.php", true);
+<<<<<<< HEAD
 
         xhr.onload = function () {
             if (this.responseText == 'pass_mismatch') {
@@ -215,4 +267,41 @@
     }
 
     setActive();
+=======
+        
+
+        xhr.onload = function () {
+         if(this.responseText == 'pass_mismatch'){
+            alert('error',"Password Mismatch!");
+         }
+         else if (this.responseText == 'email_already'){
+            alert('error',"Email is already redistered!");
+         }
+         else if (this.responseText == 'phone_already'){
+            alert('error',"Phone number is already redistered!");
+         }
+         else if (this.responseText == 'inv_img'){
+            alert('error',"Only JPG, WEBP & PNG images are allowed!");
+         }
+         else if (this.responseText == 'upd_failed'){
+            alert('error'," Image upload failed!");
+         }
+         else if (this.responseText == 'ins_failed'){
+            alert('error'," Registration failed! Server down!");
+         }
+         else{
+            alert('success'," Registration successful");
+           register_form.reset();
+         }
+
+       
+        }
+        xhr.send(data);
+
+    }
+
+
+     
+     setActive();
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 </script>

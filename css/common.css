@@ -35,9 +35,23 @@ input[type=number] {
   height: 1.7px;
 }
 
+<<<<<<< HEAD
 .custom-alert{
   position: fixed;
   top: 80px;
   right: 25px;
   z-index: 1111;
 }
+=======
+.h-line {
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+.costom-alert{
+    position: fixed;
+    top: 80px;
+    right: 25px;
+    z-index: 1111;
+}
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c

@@ -81,6 +81,7 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper mb-5">
                 <?php 
+     <<< HEAD
           $about_r = selectAll('team_details');
           $path=ABOUT_IMG_PATH;
           while($row = mysqli_fetch_assoc($about_r)){
@@ -93,9 +94,26 @@
           }
         
         ?>
+                =======
+                $about_r = selectAll('team_details');
+                $path=ABOUT_IMG_PATH;
+
+                while($row = mysqli_fetch_assoc($about_r)){
+                echo<<< data <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                    <img src="$path$row[picture]" class="w-100" width="190px" height="400">
+                    <h5 class="mt-2">$row[name]</h5>
             </div>
-            <div class="swiper-pagination"></div>
+
+
+            data;
+            }
+
+            ?>
+
+            >>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
         </div>
+        <div class="swiper-pagination"></div>
+    </div>
     </div>
 
 

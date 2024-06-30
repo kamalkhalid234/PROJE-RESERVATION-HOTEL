@@ -59,6 +59,7 @@
 
   <!-- Add room modal -->
 
+<<<<<<< HEAD
   <div class="modal fade" id="add-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <form id="add_room_form" autocomplete="off">
@@ -272,5 +273,12 @@
 
   <script src="scripts/rooms.js"></script>
 
+=======
+
+
+
+    <?php require ("inc/scripts.php"); ?>
+   <script src="scripts/rooms.js"></script>
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 </body>
 </html>

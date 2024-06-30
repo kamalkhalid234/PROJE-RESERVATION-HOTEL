@@ -10,7 +10,12 @@ define('ROOMS_IMG_PATH', SITE_URL . 'images/rooms/');
 define('USERS_IMG_PATH', SITE_URL . 'images/users/');
 
 
+<<<<<<< HEAD
 //backend upload process needs this data
+=======
+
+//! back-end upload process needs this data
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 
 define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . "/MCW/PROJE-RESERVATION-HOTEL/images/");
 define('ABOUT_FOLDER', 'about/');
@@ -18,6 +23,10 @@ define('CAROUSEL_FOLDER', 'carousel/');
 define('FACILITIES_FOLDER', 'facilities/');
 define('ROOMS_FOLDER', 'rooms/');
 define('USERS_FOLDER', 'users/');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 
 // sendgrid api key
 
@@ -113,6 +122,7 @@ function uploadSVGImage($image, $folder)
   }
 }
 
+<<<<<<< HEAD
 function uploadUserImage($image)
 {
   $valid_mime = ['image/jpeg', 'image/png', 'image/webp'];
@@ -143,4 +153,35 @@ function uploadUserImage($image)
   }
 }
 
+=======
+function uploadUserImage($image){
+  $valid_mime = ['image/jpeg', 'image/png', 'image/webp'];
+    $img_mime = $image['type'];
+
+    if (!in_array($img_mime, $valid_mime)) {
+        return 'inv_img';   // invalide image mime or format
+    } else {
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $rname = 'IMG_' . random_int(11111, 99999) . ".jpeg";
+
+        $img_path = UPLOAD_IMAGE_PATH.USERS_FOLDER.$rname;
+
+        if($ext == 'png'|| $ext == 'PNG'){
+            $img = imagecreatefrompng($image['tmp_name']);
+        }
+        else if($ext == 'webp'|| $ext == 'WEBP'){
+            $img = imagecreatefromwebp($image['tmp_name']);
+        }
+        else{
+            $img = imagecreatefromjpeg($image['tmp_name']);
+        }
+
+        if (imagejpeg($img,$img_path,75)) {
+            return $rname;
+        } else {
+            return 'upd_failed';
+        }
+    }
+}
+>>>>>>> 3c6e1e96449f9365095fe334d48b53708fed582c
 ?>

@@ -2,40 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
-    <?php require ('inc/links.php'); ?>
-    <title><?php echo $settings_r['site_title'] ?> - HOME</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  <?php require ('inc/links.php'); ?>
+  <!-- <title><?php
+  echo $settings_r['site_title']
+    ?> - HOME</title> -->
+  <style>
     .availability-form {
-        margin-top: -50px;
-        z-index: 2;
-        position: relative;
+      margin-top: -50px;
+      z-index: 2;
+      position: relative;
     }
 
     @media screen and (max-width: 575px) {
-        .availability-form {
-            margin-top: 25px;
-            padding: 0 35px;
-        }
+      .availability-form {
+        margin-top: 25px;
+        padding: 0 35px;
+      }
     }
-    </style>
+  </style>
 </head>
 
 <body class="bg-light">
 
 
 
-    <?php require ('inc/header.php'); ?>
+  <?php require ('inc/header.php'); ?>
 
-    <!-- Carousel -->
+  <!-- Carousel -->
 
-    <div class="container-fluid px-lg-4 mt-4">
-        <div class="swiper swiper-container">
-            <div class="swiper-wrapper">
-                <?php
+  <div class="container-fluid px-lg-4 mt-4">
+    <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
+        <?php
         $res = selectAll('carousel');
         while ($row = mysqli_fetch_assoc($res)) {
           $path = CAROUSEL_IMG_PATH;
@@ -46,30 +48,30 @@
             data;
         }
         ?>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- check availability form -->
+  <!-- check availability form -->
 
-    <div class="container availability-form">
-        <div class="row">
-            <div class="col-lg-12 bg-white shadow p-4 rounded">
-                <h5 class="mb-4" id="h1Check">Check Booking Availability</h5>
-                <form action="rooms.php">
-                    <div class="row align-items-end">
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;" id="Check_in">Check-in</label>
-                            <input type=" date" class="form-control shadow-none" name="checkin" required>
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;" id="Check_out">Check-out</label>
-                            <input type="date" class="form-control shadow-none" name="checkout" required>
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" id="Adult" style="font-weight: 500;">Adult</label>
-                            <select class="form-select shadow-none" name="adult">
-                                <?php
+  <div class="container availability-form">
+    <div class="row">
+      <div class="col-lg-12 bg-white shadow p-4 rounded">
+        <h5 class="mb-4" id="h1Check">Check Booking Availability</h5>
+        <form action="rooms.php">
+          <div class="row align-items-end">
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight: 500;" id="Check_in">Check-in</label>
+              <input type=" date" class="form-control shadow-none" name="checkin" required>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight: 500;" id="Check_out">Check-out</label>
+              <input type="date" class="form-control shadow-none" name="checkout" required>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" id="Adult" style="font-weight: 500;">Adult</label>
+              <select class="form-select shadow-none" name="adult">
+                <?php
                 $guests_q = mysqli_query($con, "SELECT MAX(adult) AS `max_adult`, MAX(children) AS `max_children` 
                     FROM `rooms` WHERE `status`='1' AND `removed`='0'");
                 $guests_res = mysqli_fetch_assoc($guests_q);
@@ -78,37 +80,36 @@
                   echo "<option value='$i'>$i</option>";
                 }
                 ?>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 mb-3">
-                            <label class="form-label" id="Children" style="font-weight: 500;">Children</label>
-                            <select class="form-select shadow-none" name="children">
-                                <?php
+              </select>
+            </div>
+            <div class="col-lg-2 mb-3">
+              <label class="form-label" id="Children" style="font-weight: 500;">Children</label>
+              <select class="form-select shadow-none" name="children">
+                <?php
                 for ($i = 1; $i <= $guests_res['max_children']; $i++) {
                   echo "<option value='$i'>$i</option>";
                 }
                 ?>
-                            </select>
-                        </div>
-                        <input type="hidden" name="check_availability">
-                        <div class="col-lg-1 mb-lg-3 mt-2">
-                            <button type="submit" id="submt"
-                                class="btn text-white shadow-none custom-bg">Submit</button>
-                        </div>
-                    </div>
-                </form>
+              </select>
             </div>
-        </div>
+            <input type="hidden" name="check_availability">
+            <div class="col-lg-1 mb-lg-3 mt-2">
+              <button type="submit" id="submt" class="btn text-white shadow-none custom-bg">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <!-- Our Rooms -->
+  <!-- Our Rooms -->
 
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="our_rooms">OUR ROOMS</h2>
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="our_rooms">OUR ROOMS</h2>
 
-    <div class="container">
-        <div class="row">
+  <div class="container">
+    <div class="row">
 
-            <?php
+      <?php
 
       $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `id` DESC LIMIT 3", [1, 0], 'ii');
 
@@ -152,7 +153,7 @@
         }
 
         $book_btn = "";
-
+        // bouton de choutdown pour reserve 
         if (!$settings_r['shutdown']) {
           $login = 0;
           if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
@@ -225,21 +226,20 @@
 
       ?>
 
-            <div class="col-lg-12 text-center mt-5">
-                <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none"
-                    id="More_rooms">More Rooms
-                    >>></a>
-            </div>
-        </div>
+      <div class="col-lg-12 text-center mt-5">
+        <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none" id="More_rooms">More Rooms
+          >>></a>
+      </div>
     </div>
+  </div>
 
-    <!-- Our Facilities -->
+  <!-- Our Facilities -->
 
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="our_facilities">OUR FACILITIES</h2>
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="our_facilities">OUR FACILITIES</h2>
 
-    <div class="container">
-        <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
-            <?php
+  <div class="container">
+    <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
+      <?php
       $res = mysqli_query($con, "SELECT * FROM `facilities` ORDER BY `id` DESC LIMIT 5");
       $path = FACILITIES_IMG_PATH;
 
@@ -253,22 +253,22 @@
       }
       ?>
 
-            <div class="col-lg-12 text-center mt-5">
-                <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none"
-                    id="More_facilities">More
-                    Facilities >>></a>
-            </div>
-        </div>
+      <div class="col-lg-12 text-center mt-5">
+        <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none"
+          id="More_facilities">More
+          Facilities >>></a>
+      </div>
     </div>
+  </div>
 
-    <!-- Testimonials -->
+  <!-- Testimonials -->
 
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="testimonaire">TESTIMONIALS</h2>
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="testimonaire">TESTIMONIALS</h2>
 
-    <div class="container mt-5">
-        <div class="swiper swiper-testimonials">
-            <div class="swiper-wrapper mb-5">
-                <?php
+  <div class="container mt-5">
+    <div class="swiper swiper-testimonials">
+      <div class="swiper-wrapper mb-5">
+        <?php
 
         $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
             INNER JOIN `user_cred` uc ON rr.user_id = uc.id
@@ -305,35 +305,33 @@
         }
 
         ?>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div class="col-lg-12 text-center mt-5">
-            <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none" id="Know_More">Know
-                More
-                >>></a>
-        </div>
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
+    <div class="col-lg-12 text-center mt-5">
+      <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none" id="Know_More">Know
+        More
+        >>></a>
+    </div>
+  </div>
 
-    <!-- Reach us -->
+  <!-- Reach us -->
 
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="reach">REACH US</h2>
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font" id="reach">REACH US</h2>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
-                <iframe class="w-100 rounded" height="320px" src="<?php echo $contact_r['iframe'] ?>"
-                    loading="lazy"></iframe>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <div class="bg-white p-4 rounded mb-4">
-                    <h5 id="Call_us ">Call us</h5>
-                    <a href="tel: +<?php echo $contact_r['pn1'] ?>"
-                        class="d-inline-block mb-2 text-decoration-none text-dark">
-                        <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
-                    </a>
-                    <br>
-                    <?php
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
+        <iframe class="w-100 rounded" height="320px" src="<?php echo $contact_r['iframe'] ?>" loading="lazy"></iframe>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="bg-white p-4 rounded mb-4">
+          <h5 id="Call_us ">Call us</h5>
+          <a href="tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+            <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
+          </a>
+          <br>
+          <?php
           if ($contact_r['pn2'] != '') {
             echo <<<data
                 <a href="tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
@@ -343,10 +341,10 @@
           }
 
           ?>
-                </div>
-                <div class="bg-white p-4 rounded mb-4">
-                    <h5 id="Follow_us ">Follow us</h5>
-                    <?php
+        </div>
+        <div class="bg-white p-4 rounded mb-4">
+          <h5 id="Follow_us ">Follow us</h5>
+          <?php
           if ($contact_r['tw'] != '') {
             echo <<<data
                 <a href="$contact_r[tw]" class="d-inline-block mb-3">
@@ -359,55 +357,55 @@
           }
           ?>
 
-                    <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block mb-3">
-                        <span class="badge bg-light text-dark fs-6 p-2">
-                            <i class="bi bi-facebook me-1"></i> Facebook
-                        </span>
-                    </a>
-                    <br>
-                    <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block">
-                        <span class="badge bg-light text-dark fs-6 p-2">
-                            <i class="bi bi-instagram me-1"></i> Instagram
-                        </span>
-                    </a>
-                </div>
-            </div>
+          <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block mb-3">
+            <span class="badge bg-light text-dark fs-6 p-2">
+              <i class="bi bi-facebook me-1"></i> Facebook
+            </span>
+          </a>
+          <br>
+          <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block">
+            <span class="badge bg-light text-dark fs-6 p-2">
+              <i class="bi bi-instagram me-1"></i> Instagram
+            </span>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Password reset modal and code -->
+  <!-- Password reset modal and code -->
 
-    <div class="modal fade" id="recoveryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="recovery-form">
-                    <div class="modal-header">
-                        <h5 class="modal-title d-flex align-items-center">
-                            <i class="bi bi-shield-lock fs-3 me-2"></i> Set up New Password
-                        </h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-4">
-                            <label class="form-label">New Password</label>
-                            <input type="password" name="pass" required class="form-control shadow-none">
-                            <input type="hidden" name="email">
-                            <input type="hidden" name="token">
-                        </div>
-                        <div class="mb-2 text-end">
-                            <button type="button" class="btn shadow-none me-2" data-bs-dismiss="modal">CANCEL</button>
-                            <button type="submit" class="btn btn-dark shadow-none">SUBMIT</button>
-                        </div>
-                    </div>
-                </form>
+  <div class="modal fade" id="recoveryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="recovery-form">
+          <div class="modal-header">
+            <h5 class="modal-title d-flex align-items-center">
+              <i class="bi bi-shield-lock fs-3 me-2"></i> Set up New Password
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="mb-4">
+              <label class="form-label">New Password</label>
+              <input type="password" name="pass" required class="form-control shadow-none">
+              <input type="hidden" name="email">
+              <input type="hidden" name="token">
             </div>
-        </div>
+            <div class="mb-2 text-end">
+              <button type="button" class="btn shadow-none me-2" data-bs-dismiss="modal">CANCEL</button>
+              <button type="submit" class="btn btn-dark shadow-none">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
 
-    <?php require ('inc/footer.php'); ?>
+  <?php require ('inc/footer.php'); ?>
 
-    <?php
+  <?php
 
   if (isset($_GET['account_recovery'])) {
     $data = filteration($_GET);
@@ -440,50 +438,50 @@
 
   ?>
 
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-    <script>
+  <script>
     var swiper = new Swiper(".swiper-container", {
-        spaceBetween: 30,
-        effect: "fade",
-        loop: true,
-        autoplay: {
-            delay: 3500,
-            disableOnInteraction: false,
-        }
+      spaceBetween: 30,
+      effect: "fade",
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      }
     });
 
     var swiper = new Swiper(".swiper-testimonials", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        slidesPerView: "3",
-        loop: true,
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: false,
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      slidesPerView: "3",
+      loop: true,
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
         },
-        pagination: {
-            el: ".swiper-pagination",
+        640: {
+          slidesPerView: 1,
         },
-        breakpoints: {
-            320: {
-                slidesPerView: 1,
-            },
-            640: {
-                slidesPerView: 1,
-            },
-            768: {
-                slidesPerView: 2,
-            },
-            1024: {
-                slidesPerView: 3,
-            },
-        }
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      }
     });
 
     // recover account
@@ -491,37 +489,37 @@
     let recovery_form = document.getElementById('recovery-form');
 
     recovery_form.addEventListener('submit', (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        let data = new FormData();
+      let data = new FormData();
 
-        data.append('email', recovery_form.elements['email'].value);
-        data.append('token', recovery_form.elements['token'].value);
-        data.append('pass', recovery_form.elements['pass'].value);
-        data.append('recover_user', '');
+      data.append('email', recovery_form.elements['email'].value);
+      data.append('token', recovery_form.elements['token'].value);
+      data.append('pass', recovery_form.elements['pass'].value);
+      data.append('recover_user', '');
 
-        var myModal = document.getElementById('recoveryModal');
-        var modal = bootstrap.Modal.getInstance(myModal);
-        modal.hide();
+      var myModal = document.getElementById('recoveryModal');
+      var modal = bootstrap.Modal.getInstance(myModal);
+      modal.hide();
 
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "ajax/login_register.php", true);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "ajax/login_register.php", true);
 
-        xhr.onload = function() {
-            if (this.responseText == 'failed') {
-                alert('error', "Account reset failed!");
-            } else {
-                alert('success', "Account Reset Successful !");
-                recovery_form.reset();
-            }
+      xhr.onload = function () {
+        if (this.responseText == 'failed') {
+          alert('error', "Account reset failed!");
+        } else {
+          alert('success', "Account Reset Successful !");
+          recovery_form.reset();
         }
+      }
 
-        xhr.send(data);
+      xhr.send(data);
     });
-    </script>
+  </script>
 
 
-    <script src="lange.js"></script>
+  <script src="lange.js"></script>
 
 
 </body>

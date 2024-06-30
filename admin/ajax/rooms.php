@@ -205,6 +205,8 @@ if (isset($_POST['toggle_status'])) {
   }
 }
 
+
+
 if (isset($_POST['add_image'])) {
   $frm_data = filteration($_POST);
 
